@@ -1,3 +1,5 @@
 # Secret documentation file
 specs.pdf
 
+# Python virtual environment
+worker/virtual_env
