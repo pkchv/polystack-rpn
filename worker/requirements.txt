@@ -1,0 +1,2 @@
+asyncio-nats-client==0.8.2
+rpn==1.0
