@@ -3,7 +3,17 @@ version: '3'
 services:
   polystack-endpoint:
     build: './endpoint'
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
   polystack-middleware:
     build: './middleware'
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
   polystack-worker:
     build: './worker'
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
