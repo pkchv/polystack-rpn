@@ -11,16 +11,16 @@ build-middleware:
 build-worker:
 	./scripts/build-worker.sh
 
-run-all:
+run-all: build-all
 	./scripts/run-all.sh
 
-run-endpoint:
+run-endpoint: build-endpoint
 	./scripts/run-endpoint.sh
 
-run-middleware:
+run-middleware: build-middleware
 	./scripts/run-middleware.sh
 
-run-worker:
+run-worker: build-worker
 	./scripts/run-worker.sh
 
 .PHONY: build-all build-endpoint build-middleware build-worker run-all run-endpoint run-middleware run-worker
