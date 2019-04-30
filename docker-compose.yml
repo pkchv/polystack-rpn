@@ -1,22 +1,49 @@
 version: '3'
 
 services:
+  nats:
+    image: 'nats:1.4.1'
+    container_name: "polystack-nats"
+    entrypoint: "/gnatsd -DV"
+    expose:
+      - "4222"
+    ports:
+      - "8222:8222"
+    hostname: nats-server
   polystack-endpoint:
     build: "./endpoint"
     container_name: "polystack-endpoint"
     stdin_open: true
+    links:
+      - nats
+    environment:
+      - "NATS_URI=nats://nats:4222"
+    depends_on:
+      - nats
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   polystack-middleware:
     build: "./middleware"
     container_name: "polystack-middleware"
+    links:
+      - nats
+    environment:
+      - "NATS_URI=nats://nats:4222"
+    depends_on:
+      - nats
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   polystack-worker:
     build: "./worker"
     container_name: "polystack-worker"
+    links:
+      - nats
+    environment:
+      - "NATS_URI=nats://nats:4222"
+    depends_on:
+      - nats
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
