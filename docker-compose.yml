@@ -2,18 +2,21 @@ version: '3'
 
 services:
   polystack-endpoint:
-    build: './endpoint'
+    build: "./endpoint"
+    container_name: "polystack-endpoint"
+    stdin_open: true
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   polystack-middleware:
-    build: './middleware'
+    build: "./middleware"
+    container_name: "polystack-middleware"
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-
   polystack-worker:
-    build: './worker'
+    build: "./worker"
+    container_name: "polystack-worker"
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
