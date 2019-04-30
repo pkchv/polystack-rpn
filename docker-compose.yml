@@ -33,6 +33,7 @@ services:
     depends_on:
       - nats
     volumes:
+      - "./logs:/usr/src/app/logs"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   polystack-worker:

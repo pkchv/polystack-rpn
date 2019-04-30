@@ -3,3 +3,7 @@ specs.pdf
 
 # Python virtual environment
 worker/virtual_env
+
+# Logs content
+logs/*
+!logs/.gitkeep
