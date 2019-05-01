@@ -7,3 +7,6 @@ worker/virtual_env
 # Logs content
 logs/*
 !logs/.gitkeep
+
+# IDE 
+.vscode
