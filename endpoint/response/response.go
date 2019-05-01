@@ -23,8 +23,12 @@ func errorToResult(err error) string {
 	return err.Error()
 }
 
+func durationToMilliseconds(duration time.Duration) float64 {
+	return duration.Seconds() * float64(time.Second/time.Millisecond)
+}
+
 func PrettyPrint(cr *ComputationResponse) {
-	fmt.Printf("%s,%.3f\n", cr.Result, float64(cr.Duration)/float64(time.Millisecond))
+	fmt.Printf("%s,%.3f\n", cr.Result, durationToMilliseconds(cr.Duration))
 }
 
 func CreateFromData(duration time.Duration, data []byte) *ComputationResponse {

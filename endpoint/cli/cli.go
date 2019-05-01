@@ -67,7 +67,7 @@ func ParseInput(options *ParseOptions) []string {
 	for numberOfComputations > options.BufferSize {
 
 		if options.LogErrors {
-			fmt.Fprintf(os.Stderr, "Number of inputs cannot exceed %d\n", options.BufferSize)
+			fmt.Fprintf(os.Stderr, "Number of expressions cannot exceed %d\n", options.BufferSize)
 		}
 
 		numberOfComputations = parseInt(options)
@@ -79,6 +79,8 @@ func ParseInput(options *ParseOptions) []string {
 		computation := parseString(options)
 		computations = append(computations, computation)
 	}
+
+	fmt.Println()
 
 	return computations
 }

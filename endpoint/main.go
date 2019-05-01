@@ -1,32 +1,26 @@
 package main
 
 import (
+	"endpoint/config"
 	"endpoint/cli"
 	"endpoint/client"
 	"endpoint/request"
 	"endpoint/response"
-	"time"
+	sw "github.com/fatih/stopwatch"
 )
 
 func main() {
-	logErrors := true
-	bufferSize := 10
-	timeout := 2 * time.Second
-	natsUrl := "nats://nats:4222"
-	requestSubject := "endpoint-computation-requests"
-	responseSubject := "endpoint-computation-responses"
-
 	parseOptions := cli.ParseOptions{
-		LogErrors: logErrors,
-		BufferSize: bufferSize,
+		LogErrors: config.LogErrors,
+		BufferSize: config.BufferSize,
 	}
 
 	clientOptions := client.ClientOptions{
-		NatsUrl: natsUrl,
-		RequestSubject: requestSubject,
-		ResponseSubject: responseSubject,
-		Timeout: timeout,
-		LogErrors: true,
+		NatsUrl: config.NatsUrl,
+		RequestSubject: config.RequestSubject,
+		ResponseSubject: config.ResponseSubject,
+		Timeout: config.Timeout,
+		LogErrors: config.LogErrors,
 	}
 
 	client.Open(&clientOptions)
@@ -34,20 +28,24 @@ func main() {
 
 	input := cli.ParseInput(&parseOptions)
 	expressions := request.FromStringSlice(input)
+	stopwatches := make([]*sw.Stopwatch, 0)
 
 	for _, expression := range expressions {
-		start := time.Now()
-		client.Publish(expression)
+		stopwatches = append(stopwatches, sw.Start(0))
+		client.Publish(expression)	
+	}
+
+	for _, stopwatch := range stopwatches {
 		msg, err := client.GetMessage()
-		end := time.Now()
-		dur := end.Sub(start)
+		stopwatch.Stop()
+		duration := stopwatch.ElapsedTime()
 
 		if err == nil {
-			res := response.CreateFromData(dur, msg.Data)
+			res := response.CreateFromData(duration, msg.Data)
 			response.PrettyPrint(res)
 		} else {
-			errRes := response.CreateFromError(dur, err)
-			response.PrettyPrint(errRes)
+			res := response.CreateFromError(duration, err)
+			response.PrettyPrint(res)
 		}
 	}
 

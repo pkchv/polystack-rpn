@@ -1,3 +1,5 @@
+github.com/fatih/stopwatch v1.0.0 h1:sTac5Q8e+Ql27wjVze0rOHWVQqkKmhSlPmQbNlAsZz0=
+github.com/fatih/stopwatch v1.0.0/go.mod h1:OJI5FjXD3U1Y019APt3bVM7Fm94Ambcu2RTXh5FUVMs=
 github.com/nats-io/go-nats v1.7.2 h1:cJujlwCYR8iMz5ofZSD/p2WLW8FabhkQ2lIEVbSvNSA=
 github.com/nats-io/go-nats v1.7.2/go.mod h1:+t7RHT5ApZebkrQdnn6AhQJmhJJiKAvJUio1PiiCtj0=
 github.com/nats-io/nkeys v0.0.2 h1:+qM7QpgXnvDDixitZtQUBDY9w/s9mu1ghS+JIbsrx6M=

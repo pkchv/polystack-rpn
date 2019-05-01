@@ -17,7 +17,11 @@ services:
     links:
       - nats
     environment:
+      - "BUFFER_SIZE=64"
+      - "LOG_ERRORS=true"
       - "NATS_URI=nats://nats:4222"
+      - "REQ_SUBJECT=endpoint-computation-requests"
+      - "RES_SUBJECT=endpoint-computation-responses"
     depends_on:
       - nats
       - polystack-middleware
