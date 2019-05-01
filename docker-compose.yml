@@ -21,7 +21,6 @@ services:
     depends_on:
       - nats
       - polystack-middleware
-      - polystack-worker
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
@@ -31,10 +30,15 @@ services:
     links:
       - nats
     environment:
+      - "APP_ID=middleware"
+      - "LOG_PATH=./logs/middleware.log"
       - "NATS_URI=nats://nats:4222"
+      - "REQ_WORKER=worker-computation-requests"
+      - "RES_WORKER=worker-computation-responses"
+      - "REQ_ENDPOINT=endpoint-computation-requests"
+      - "RES_ENDPOINT=endpoint-computation-responses"
     depends_on:
       - nats
-      - polystack-worker
     volumes:
       - "./logs:/usr/src/app/logs"
       - "/etc/timezone:/etc/timezone:ro"
@@ -51,6 +55,7 @@ services:
       - "PUB_SUBJECT=worker-computation-responses"
     depends_on:
       - nats
+      - polystack-middleware
     volumes:
       - "./logs:/usr/src/polystack-worker/logs"
       - "/etc/timezone:/etc/timezone:ro"

@@ -13,8 +13,8 @@ func main() {
 	bufferSize := 10
 	timeout := 2 * time.Second
 	natsUrl := "nats://nats:4222"
-	requestSubject := "worker-computation-requests"
-	responseSubject := "worker-computation-responses"
+	requestSubject := "endpoint-computation-requests"
+	responseSubject := "endpoint-computation-responses"
 
 	parseOptions := cli.ParseOptions{
 		LogErrors: logErrors,

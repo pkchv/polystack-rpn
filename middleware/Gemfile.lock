@@ -7,16 +7,16 @@ GEM
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
     multi_json (1.13.1)
-    nats (0.10.0)
-      eventmachine (~> 1.2, >= 1.2)
+    nats-pure (0.5.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  eventmachine
   logging (~> 2.2, >= 2.2.2)
   multi_json (~> 1.13, >= 1.13.1)
-  nats (~> 0.10.0)
+  nats-pure (~> 0.5.0)
 
 BUNDLED WITH
    1.17.2
