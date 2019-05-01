@@ -20,6 +20,8 @@ services:
       - "NATS_URI=nats://nats:4222"
     depends_on:
       - nats
+      - polystack-middleware
+      - polystack-worker
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
@@ -32,6 +34,7 @@ services:
       - "NATS_URI=nats://nats:4222"
     depends_on:
       - nats
+      - polystack-worker
     volumes:
       - "./logs:/usr/src/app/logs"
       - "/etc/timezone:/etc/timezone:ro"
@@ -42,9 +45,13 @@ services:
     links:
       - nats
     environment:
+      - "APP_ID=worker"
       - "NATS_URI=nats://nats:4222"
+      - "SUB_SUBJECT=worker-computation-requests"
+      - "PUB_SUBJECT=worker-computation-responses"
     depends_on:
       - nats
     volumes:
+      - "./logs:/usr/src/polystack-worker/logs"
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"

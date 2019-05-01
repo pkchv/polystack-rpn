@@ -1,2 +1,5 @@
 asyncio-nats-client==0.8.2
+environs==4.1.0
+marshmallow==2.19.2
+python-dotenv==0.10.1
 rpn==1.0
